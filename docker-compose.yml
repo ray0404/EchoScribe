@@ -1,0 +1,49 @@
+# EchoScribe - Offline-first Audio Recording & Transcription PWA
+# Copyright (C) 2025 Adolfo Ray Valentin Olguin
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+# Source code: https://github.com/ray0404/EchoScribe
+
+version: '3.8'
+
+services:
+  app-frontend:
+    build: ./client
+    ports:
+      - "8080:80"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    command: npm run dev -- --host
+
+  app-backend:
+    build: ./server
+    ports:
+      - "8000:8000"
+    environment:
+      - AI_MODE=LOCAL
+      # - OPENAI_API_KEY=sk-... # Uncomment for CLOUD mode
+    volumes:
+      - ./server/temp:/app/temp
+      - ./server/models:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
