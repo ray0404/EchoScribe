@@ -22,7 +22,7 @@ services:
   app-frontend:
     build: ./client
     ports:
-      - "8080:80"
+      - "8080:5173"
     volumes:
       - ./client:/app
       - /app/node_modules
@@ -40,10 +40,10 @@ services:
     volumes:
       - ./server/temp:/app/temp
       - ./server/models:/root/.cache/huggingface
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
