@@ -37,3 +37,8 @@ server/models/
 .genkit/
 firebase-debug.log
 .firebase/
+
+# Gemini Specific Files
+@GEMINI.md
+@echo_scribe_base.md
+@context.md
