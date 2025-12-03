@@ -37,23 +37,24 @@ Built with privacy and resilience in mind, EchoScribe allows you to record audio
 ### Prerequisites
 
 *   **Docker** and **Docker Compose**
-*   *(Optional)* NVIDIA GPU with Container Toolkit for faster transcription.
+*   *(Optional)* NVIDIA GPU with Container Toolkit for faster transcription (configured in `docker-compose.yml` but commented out by default).
 
 ### Quick Start (Docker)
 
 1.  **Clone the repository:**
     ```bash
     git clone https://github.com/ray0404/EchoScribe.git
-    cd EchoScribe/echo-scribe
+    cd EchoScribe
     ```
 
 2.  **Start the services:**
     ```bash
-    docker-compose up --build
+    docker compose up --build
     ```
 
 3.  **Access the application:**
-    *   **Frontend**: Open [http://localhost:8080](http://localhost:8080) in your browser.
+    *   **Frontend**: Open [https://localhost:8080](https://localhost:8080) in your browser.
+        *   *Note: You will see a security warning because we use a self-signed certificate. This is required to enable microphone access on local networks. Please accept the warning to proceed.*
     *   **API Docs**: Open [http://localhost:8000/docs](http://localhost:8000/docs) to explore the backend API.
 
 ### Local Development (Manual)
